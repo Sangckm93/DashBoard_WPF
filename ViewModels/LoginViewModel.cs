@@ -1,8 +1,13 @@
-﻿using System;
+﻿using DashBoard_WPF.Models;
+using DashBoard_WPF.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -15,6 +20,8 @@ namespace DashBoard_WPF.ViewModels
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+
+        private IUserRepository userRepository;
 
         // Properties
         public string Username 
@@ -63,6 +70,7 @@ namespace DashBoard_WPF.ViewModels
         //Constructor
         public LoginViewModel()
         {
+            userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("",""));
         }
@@ -84,7 +92,17 @@ namespace DashBoard_WPF.ViewModels
 
         private void ExecuteLoginCommand(object obj)
         {
-            throw new NotImplementedException();
+            var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
+
+            if (isValidUser)
+            {
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(Username), null);
+                IsViewVisible = false;
+            }
+            else
+            {
+                ErrorMessage = "* Invalid usernam or password";
+            }
         }
 
         private void ExecuteRecoverPassCommand(string username, string password)

@@ -14,7 +14,7 @@ namespace DashBoard_WPF.Models
         void Edit(UserModel userModel);
         void Remove(int id);
         UserModel GetById(int id);
-        UserModel GetByName(string Username);
+        UserModel GetByUsername(string Username);
         IEnumerable<UserModel> GetByAll();
         //....
     }
