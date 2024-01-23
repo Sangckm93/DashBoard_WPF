@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:DashBoard_WPF"
              Startup="ApplicationStart">
     <Application.Resources>
-         
+        <ResourceDictionary Source="\Styles\UIColors.xaml"/>
     </Application.Resources>
 </Application>
