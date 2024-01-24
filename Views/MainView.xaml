@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DashBoard_WPF.Views"
         xmlns:viewModel="clr-namespace:DashBoard_WPF.ViewModels"
+        xmlns:fa ="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         WindowStyle="None"
         Background="Transparent"
@@ -65,6 +66,13 @@
                     </StackPanel>
                     
                     <!--Menu Button-->
+                    <RadioButton Style="{StaticResource menuButon}"
+                                 Tag="{StaticResource color1}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButonIcon}"/>
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuButonText}"/>
+                        </StackPanel>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             
